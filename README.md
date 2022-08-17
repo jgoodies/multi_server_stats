@@ -10,5 +10,6 @@ sudo apt install vnstat
 
 on main server:
 ```
-curl -Lo multi_server_stats.sh https://github.com/jgoodies/multi_server_stats/multi_server_stats.sh
+curl -Lo https://raw.githubusercontent.com/jgoodies/multi_server_stats/main/multi_server_stats.sh
+curl -Lo https://raw.githubusercontent.com/jgoodies/multi_server_stats/main/multi_server_stats.ini
 ```
