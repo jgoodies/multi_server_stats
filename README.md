@@ -23,7 +23,7 @@ sudo apt install sshpass jq
 
 `curl -Lo multi_server_stats.sh https://raw.githubusercontent.com/jgoodies/multi_server_stats/main/multi_server_stats.sh`
 
-`nano multi_server_stats.sh` -- enter telegram bot token and chat id there
+`nano multi_server_stats.sh` -- enter telegram bot **token** and **chat id** there
 
 `chmod +x multi_server_stats.sh`
 
