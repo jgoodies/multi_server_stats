@@ -1,6 +1,8 @@
 # multi_server_stats
 Bash script that gathers hourly average traffic statistics (outgoing) from multiple servers and sends it to Telegram using bot.
 
+<img src="https://user-images.githubusercontent.com/109092825/185260845-60d3e691-49a9-426a-815c-357a45f3a854.jpg" width="360">
+
 ## Install & Configure
 
 ### Telegram channel and bot
