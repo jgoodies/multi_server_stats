@@ -3,6 +3,10 @@ Bash script that gathers hourly average traffic statistics (outgoing) from multi
 
 ## Install & Configure
 
+### Telegram channel and bot
+
+Create bot and **copy token** (xxxxxxxxx:xxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxx). Add bot to some designated channel where you participate and where you want to send statistics. Send `test` message from your telegram account in that channel. Go to `https://api.telegram.org/botxxxxxxxxx:xxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxx/getUpdates` and **copy chat id**.
+
 ### Servers for monitoring:
 
 ```
