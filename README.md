@@ -1,14 +1,16 @@
 # multi_server_stats
 Bash script that gathers hourly average traffic statistics (outgoing) from multiple servers and sends it to Telegram using bot.
 
-on servers for monitoring:
+## Install & Configure
+
+### Servers for monitoring:
 
 ```
 sudo apt update
 sudo apt install vnstat openssh-server
 ```
 
-on server to run script as a cron job:
+### Server to run script as a cron job:
 
 ```
 sudo apt update
