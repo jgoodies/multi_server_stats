@@ -40,7 +40,7 @@
     else
       SERVERS+="%0A"
     fi
-  done <vnstat_reporting.ini
+  done <multi_server_stats.ini
   
   SERVERS=${SERVERS// /$'+'}
   UNREACHABLE=${UNREACHABLE// /$'+'}
