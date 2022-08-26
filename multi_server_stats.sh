@@ -20,10 +20,10 @@
     fi
     if ! [[ -z "$PASS" ]];
     then
-      CURR="$(sshpass -p $PASS ssh -p $PORT -tt -no StrictHostKeyChecking=accept-new $USER@$IP 'vnstat --json h 2' | jq '.interfaces[0].traffic.hour[0].tx')" # first try ...
+      CURR="$(sshpass -p $PASS ssh -p $PORT -tt -o ConnectTimeout=30 -no StrictHostKeyChecking=accept-new $USER@$IP 'vnstat --json h 2' | jq '.interfaces[0].traffic.hour[0].tx')" # first try ...
       if [[ -z "$CURR" ]]; # ... if not successful ...
       then
-        CURR="$(sshpass -p $PASS ssh -p $PORT -tt -no StrictHostKeyChecking=accept-new $USER@$IP 'vnstat --json h 2' | jq '.interfaces[0].traffic.hour[0].tx')" # ... do the second try to eliminate possible intermittent connection problem
+        CURR="$(sshpass -p $PASS ssh -p $PORT -tt -o ConnectTimeout=30 -no StrictHostKeyChecking=accept-new $USER@$IP 'vnstat --json h 2' | jq '.interfaces[0].traffic.hour[0].tx')" # ... do the second try to eliminate possible intermittent connection problem
       fi
       if ! [[ -z "$CURR" ]];
       then
