@@ -7,6 +7,8 @@
   CURR=""
   UNREACHABLE=""
   UNREACHABLE_STR=""
+  INACTIVE=""
+  INACTIVE_STR=""
   
   while read -r IP PASS USER PORT; do
     #echo "IP = |$IP| PASS = |$PASS| USER = |$USER| PORT = |$PORT|"
@@ -28,9 +30,16 @@
       if ! [[ -z "$CURR" ]];
       then
         CURR=$(bc <<< "scale=2;$CURR * 2 / 900000000")
-        KOUNT=$(( $KOUNT + 1 ))
-        SUM=$(bc <<< "$SUM + $CURR")
-        printf -v CURR "%+7s" ${CURR}
+        if [[ "$CURR" = "0" ]];
+        then
+          printf -v CURR "%+7s" "z"
+          printf -v IP "%+17s" ${IP}
+          INACTIVE+="%0A$IP"
+        else
+          KOUNT=$(( $KOUNT + 1 ))
+          SUM=$(bc <<< "$SUM + $CURR")
+          printf -v CURR "%+7s" ${CURR}
+        fi
       else
         printf -v CURR "%+7s" "x"
         printf -v IP "%+17s" ${IP}
@@ -44,16 +53,23 @@
   
   SERVERS=${SERVERS// /$'+'}
   UNREACHABLE=${UNREACHABLE// /$'+'}
+  INACTIVE=${INACTIVE// /$'+'}
   
   #echo "UNREACHABLE = |$UNREACHABLE|"
   if ! [[ -z "$UNREACHABLE" ]];
   then
     UNREACHABLE_STR="%0Aunreachable+servers%3A$UNREACHABLE"
   fi
+  
+  #echo "INACTIVE = |$INACTIVE|"
+  if ! [[ -z "$INACTIVE" ]];
+  then
+    INACTIVE_STR="%0Ainactive+servers%3A$INACTIVE"
+  fi
     
   if [ "$KOUNT" -gt 0 ];
   then
-    curl "https://api.telegram.org/botxxxxxxxxxx:xxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxx/sendMessage?chat_id=-xxxxxxxxxxxxx&text=Last+hour+avg+traffic+%3D+$SUM+Mbit%2Fs%3B%0Aservers+($KOUNT,+in+Mbit%2Fs)%3A%0A$SERVERS$UNREACHABLE_STR"
+    curl "https://api.telegram.org/botxxxxxxxxxx:xxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxx/sendMessage?chat_id=-xxxxxxxxxxxxx&text=Last+hour+avg+traffic+%3D+$SUM+Mbit%2Fs%3B%0Aservers+($KOUNT,+in+Mbit%2Fs)%3A%0A$SERVERS$UNREACHABLE_STR$INACTIVE_STR"
   fi
 #  sleep 60
 #done
